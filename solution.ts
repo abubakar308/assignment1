@@ -1,5 +1,5 @@
 
-const formatValue = (value: string| number | boolean) =>{
+const formatValue = (value: string| number | boolean) : string | number | boolean =>{
     if(typeof value === "string"){
         return value.toUpperCase();
     }
@@ -9,16 +9,23 @@ const formatValue = (value: string| number | boolean) =>{
     else if(typeof value === "boolean"){
         return !value;
     }
+    else {
+        return "wrong type";
+        ;
+    }
 }
 
 
 
-const getLength = (value: string | number[]) =>{
+const getLength = (value: string | number[]): string | number =>{
     if(typeof value === "string"){
         return value.length;
     }
-    else if(Array.isArray(value)){
+     else if(Array.isArray(value)){
         return value.length;
+    }
+    else{
+        return "wrong value type"
     }
 }
 
@@ -34,15 +41,10 @@ class Person {
     }
 
     getDetails (){
-        return `'Name: ${this.name},  Age: ${this.age}'`;
+        return `'Name: ${this.name}, Age: ${this.age}'`;
     }
 
 }
-    const person1 = new Person('John Doe', 30);
-    const person2 = new Person('Alice', 25);
-
-
-
 
 
     
@@ -50,20 +52,10 @@ class Person {
         title: string,
         rating: number
     }
-    
-    const filterByRating = (item: item[]) =>{
-    
-    
-       const filterItem =  item.filter(i=> i.rating>=4);
- return filterItem;
-     
+    const filterByRating = (item: item[]): item[] =>{
+       const filterItem: item[] =  item.filter(i=> i.rating>=4);
+        return filterItem; 
     }
-
-  const books = [
-  { title: 'Book A', rating: 4.5 },
-  { title: 'Book B', rating: 3.2 },
-  { title: 'Book C', rating: 5.0 },
-];
 
 
 
@@ -73,17 +65,10 @@ type User = {
     email: string,
     isActive: boolean
 }
-
-const filterActiveUsers = (user: User[]) =>{
-const filterActiveuser = user.filter(u=>u.isActive === true)
-return filterActiveuser
+const filterActiveUsers = (users: User[]) =>{
+const filterActiveuser: User[] = users.filter(user=>user.isActive === true)
+    return filterActiveuser;
 }
-
-const users = [
-  { id: 1, name: 'Rakib', email: 'rakib@example.com', isActive: true },
-  { id: 2, name: 'Asha', email: 'asha@example.com', isActive: false },
-  { id: 3, name: 'Rumi', email: 'rumi@example.com', isActive: true },
-];
 
 
 
@@ -93,35 +78,31 @@ author: string,
 publishedYear: number
 isAvailable: boolean
 }
-
-
-const myBook: Book = {
-  title: 'The Great Gatsby',
-  author: 'F. Scott Fitzgerald',
-  publishedYear: 1925,
-  isAvailable: true,
-};
-
 const printBookDetails = (book: Book) =>{
     return `Title: ${book.title}, Authyor: ${book.author}, Published: ${book.publishedYear}, Availabe: ${book.isAvailable? "Yes" : "No"}`;
 }
 
 
-
-const getUniqueValues = (array1: number[], array2: number[]) =>{
+const getUniqueValues = (array1: number[], array2: number[]): number[] =>{
    const margeArray = array1.concat(array2);
-   let newArray : number[] = []
+   let newArray : number[] = [];
     for(let i=0; i<margeArray.length; i++){
-       margeArray.indexOf
-        
+          let isDuplicate = false;
+      for(let j=0; j<newArray.length; j++){
+       if(margeArray[i] === newArray[j]){
+         isDuplicate = true;
+        break;  
+         }   
+     }
+          if(!isDuplicate){
+            newArray[newArray.length]= newArray[i];
+
+      }
+     
     }
+    return newArray 
 
 }
-
-const array1 = [1, 2, 3, 4, 5];
-const array2 = [3, 4, 5, 6, 7];
-
-// console.log(getUniqueValues(array1, array2));
 
 
 type Product = {
@@ -130,7 +111,6 @@ type Product = {
     quantity: number,
     discount?: number
 }
-
 const calculateTotalPrice = (product: Product[]) =>{
     const totalPrice = product.reduce((acc, item) => {
         if(item?.discount){
@@ -141,12 +121,6 @@ const calculateTotalPrice = (product: Product[]) =>{
   return totalPrice;
 
 }
-
-const products = [
-  { name: 'Pen', price: 10, quantity: 2 },
-  { name: 'Notebook', price: 25, quantity: 3, discount: 10 },
-  { name: 'Bag', price: 50, quantity: 1, discount: 20 },
-];
 
 
  
