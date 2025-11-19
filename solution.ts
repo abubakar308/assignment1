@@ -83,26 +83,25 @@ const printBookDetails = (book: Book) =>{
 }
 
 
-const getUniqueValues = (array1: number[], array2: number[]): number[] =>{
-   const margeArray = array1.concat(array2);
-   let newArray : number[] = [];
-    for(let i=0; i<margeArray.length; i++){
-          let isDuplicate = false;
-      for(let j=0; j<newArray.length; j++){
-       if(margeArray[i] === newArray[j]){
-         isDuplicate = true;
-        break;  
-         }   
-     }
-          if(!isDuplicate){
-            newArray[newArray.length]= newArray[i];
+const getUniqueValues = (array1: (string | number)[], array2: (string | number)[]): (string| number)[] =>{
+   const mergedArray = [...array1, ...array2];
 
-      }
-     
+   const result: (string | number)[] = []; 
+    const exists = (arr: (string | number)[], value: string | number): boolean => {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === value) return true;
     }
-    return newArray 
+    return false;
+  };
 
+for (let i = 0; i < mergedArray.length; i++) {
+    if (!exists(result, mergedArray[i])) {
+      result[result.length] = mergedArray[i]; 
+    }
+  }
+return result;
 }
+
 
 
 type Product = {
